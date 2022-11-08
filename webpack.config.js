@@ -1,16 +1,16 @@
 const path = require("path");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-const devMode= process.env.NODE_ENV !== 'production';
+const devMode = process.env.NODE_ENV !== "production";
 module.exports = {
   entry: "./src/index.js",
   output: {
     path: path.resolve(__dirname, "dist"),
     filename: "bundle.js",
-    assetModuleFilename: 'images/[name][ext][query]',
+    assetModuleFilename: "images/[name][ext][query]",
     clean: true,
   },
   devServer: {
-    static: './',
+    static: "./",
     open: true,
     host: "localhost",
     devMiddleware: {
@@ -19,7 +19,7 @@ module.exports = {
   },
   plugins: [
     new MiniCssExtractPlugin({
-      filename: 'style.css',
+      filename: "style.css",
     }),
   ],
   module: {
@@ -29,25 +29,20 @@ module.exports = {
         use: [
           MiniCssExtractPlugin.loader,
           {
-            loader: 'css-loader',
+            loader: "css-loader",
             options: {
               importLoaders: 2,
             },
           },
           {
-            loader: 'postcss-loader',
+            loader: "postcss-loader",
             options: {
               postcssOptions: {
-                plugins: [
-                  [
-                    'postcss-preset-env',
-                    {},
-                  ],
-                ],
+                plugins: [["postcss-preset-env", {}]],
               },
             },
           },
-          'sass-loader',
+          "sass-loader",
         ],
       },
       {
@@ -56,10 +51,8 @@ module.exports = {
       },
     ],
   },
-  devtool: devMode ? 'source-map': 'eval',
+  devtool: devMode ? "source-map" : "eval",
   watchOptions: {
-    ignored: /node_modules/
+    ignored: /node_modules/,
   },
 };
-
-
